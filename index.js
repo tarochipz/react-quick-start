@@ -111,22 +111,29 @@ class Game extends React.Component {
   render() {
     const history = this.state.history.slice(0,this.state.stepNumber+1);
     const locationHistory = this.state.locationHistory.slice(0,this.state.stepNumber +1);
-//console.log(locationHistory);
     const current = history[this.state.stepNumber];
     const winner = calculateWinner(current.squares);
+    var fontStyle;
     const moves = history.map((step,move) => {
     const desc = move ?
-      'Go to move #' + move + ' ' + locationHistory[move].rowNum + ',' 
-      + locationHistory[move].colNum:
+      'Go to move #' + move + ' ; Location:' + locationHistory[move].rowNum + ',' 
+      + locationHistory[move].colNum :
       'Go to game start';
-      console.log(locationHistory[move]);
+
+      if(move === this.state.stepNumber) {
+         fontStyle = {fontWeight:'bold'}
+      } else {
+         fontStyle = {fontWeight:'normal'}
+      };
+
       return (
         <li key={move}>
-          <button onClick={() => this.jumpTo(move)}> 
+          <button onClick={() => this.jumpTo(move)} style={fontStyle}> 
           {desc}
           </button>
         </li>
-        );
+        )
+
     });
 
 
