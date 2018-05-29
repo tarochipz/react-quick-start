@@ -86,9 +86,12 @@ class Game extends React.Component {
       locationHistory: [{
         rowNum: null,
         colNum: null
-      }]
+      }],
+      asc:true //used in toggle
     };
   }
+
+
 
   handleClick(i) {
     const history = this.state.history.slice(0,this.state.stepNumber +1);
@@ -124,6 +127,13 @@ class Game extends React.Component {
     });
   }
 
+  sortMoves(){
+      this.setState({
+        asc: !this.state.asc
+      })
+      //console.log(asc);
+  }
+
   render() {
     const history = this.state.history.slice(0,this.state.stepNumber+1);
     const locationHistory = this.state.locationHistory.slice(0,this.state.stepNumber +1);
@@ -149,8 +159,13 @@ class Game extends React.Component {
           </button>
         </li>
         )
+    }
+    );
 
-    });
+ 
+    if (!this.state.asc) {
+       moves.reverse();
+    }
 
 
     let status;
@@ -169,8 +184,10 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
+
         <div>{status}</div>
           <ol>{moves}</ol>
+          <button onClick={(i)=> this.sortMoves()}>Toggle Move Order</button>
         </div>
       </div>
     );
