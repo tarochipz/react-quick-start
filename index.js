@@ -5,17 +5,16 @@ import './index.css';
 class Square extends React.Component {
   render() {
     let winningSquareColor ;
-    let iValue = this.props.key; 
     if (this.props.winningSquares) {
        for (let i = 0; i < this.props.winningSquares.length;i++) {
-        debugger;
+      //  debugger;
          if (this.props.winningSquares[i] === this.props.dataIndex) {
             winningSquareColor = {backgroundColor:'yellow'};
           }
         } 
     }
 
-console.log(this.props.winningSquares);
+//console.log(this.props.winningSquares);
     return (
       <button style={winningSquareColor} className="square" onClick={()=>this.props.onClick()}>
         {this.props.value}
@@ -78,7 +77,7 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
-    debugger;
+    //debugger;
     const history = this.state.history.slice(0,this.state.stepNumber +1);
     const locationHistory = this.state.locationHistory.slice(0,this.state.stepNumber +1);
     const rowNum = Math.floor(i/3);
@@ -134,8 +133,6 @@ class Game extends React.Component {
 
       if(move === this.state.stepNumber) {
          fontStyle = {fontWeight:'bold'}
-      } else {
-         fontStyle = {fontWeight:'normal'}
       };
 
       return (
@@ -158,11 +155,15 @@ class Game extends React.Component {
     if (winner) {
     status = 'Winner: ' + winner;
     winningSquares = winnerIndex;
-
-    } else {
+    }  else {
+      if(history.length==10){
+        status = "It's a draw!";
+      }
+    else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
-
+  }
+    
     return (
       <div className="game">
         <div className="game-board">
