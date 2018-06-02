@@ -3,20 +3,31 @@ import ReactDOM from 'react-dom';
 import './index.css';
 
 class Square extends React.Component {
+
+
   render() {
+    let moveColor;
+    if(this.props.value =='X'){
+         moveColor = '#FF1652';
+    } if(this.props.value=='O') {
+      moveColor = '#494949';
+    }
+
     let winningSquareColor ;
     if (this.props.winningSquares) {
        for (let i = 0; i < this.props.winningSquares.length;i++) {
-      //  debugger;
-         if (this.props.winningSquares[i] === this.props.dataIndex) {
-            winningSquareColor = {backgroundColor:'yellow'};
+         if (this.props.winningSquares[i] === this.props.dataIndex && this.props.value=='O') {
+            winningSquareColor = '#A0A0A0';
           }
+          if (this.props.winningSquares[i] === this.props.dataIndex && this.props.value=='X') {
+            winningSquareColor = '#FFA6BD';
         } 
     }
+  }
 
 //console.log(this.props.winningSquares);
     return (
-      <button style={winningSquareColor} className="square" onClick={()=>this.props.onClick()}>
+      <button style={{backgroundColor:winningSquareColor,color:moveColor}} className="square" onClick={()=>this.props.onClick()}>
         {this.props.value}
       </button>
     );
@@ -57,7 +68,6 @@ let rows = [];
   }
 }
 
-       
 class Game extends React.Component {
 
   constructor(props) {
@@ -134,7 +144,6 @@ class Game extends React.Component {
       if(move === this.state.stepNumber) {
          fontStyle = {fontWeight:'bold'}
       };
-
       return (
         <li key={move}>
           <button onClick={() => this.jumpTo(move)} style={fontStyle}> 
@@ -155,11 +164,11 @@ class Game extends React.Component {
     if (winner) {
     status = 'Winner: ' + winner;
     winningSquares = winnerIndex;
-    }  else {
-      if(history.length==10){
+    } else {
+       if(history.length == 10){
         status = "It's a draw!";
       }
-    else {
+     else {
       status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
     }
   }
@@ -175,10 +184,9 @@ class Game extends React.Component {
           />
         </div>
         <div className="game-info">
-
-        <div>{status}</div>
+        <div className="status">{status}</div>
+          <button className="sort-button" onClick={(i)=> this.sortMoves()}>Sort Move Order</button>
           <ol>{moves}</ol>
-          <button onClick={(i)=> this.sortMoves()}>Toggle Move Order</button>
         </div>
       </div>
     );

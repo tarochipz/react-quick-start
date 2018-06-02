@@ -5,7 +5,7 @@ dy {
 }
 
 ol, ul {
-  padding-left: 30px;
+  padding-left: 2px;
 }
 
 .board-row:after {
@@ -19,18 +19,17 @@ ol, ul {
 }
 
 .square {
-  background: #fff;
-  border: 1px solid #999;
+  background: #D5D5D5;
+  border: 1.5px solid #fff;
   float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
+  font-size: 50px;
+  line-height: 84px;
+  height: 84px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 34px;
+  width: 84px;
 }
 
 .square:focus {
@@ -47,6 +46,18 @@ ol, ul {
 }
 
 .game-info {
-  margin-left: 20px;
+  margin-left: 40px;
+  font-family: arial;
 }
+
+.status{
+  font-size:20px;
+  font-weight:bold;
+}
+
+.sort-button{
+  margin-top:6px;
+}
+
+
 
